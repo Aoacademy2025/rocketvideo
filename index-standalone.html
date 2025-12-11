@@ -1,0 +1,977 @@
+<!doctype html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rocket - AI Video Generator | Lifetime License</title>
+    <meta name="description" content="เลิกจ่ายรายเดือน สร้างคลิปไวรัลด้วย AI บนเครื่องคุณ ซื้อขาด License ถาวร" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta property="og:title" content="Rocket - AI Video Generator" />
+    <meta property="og:description" content="เลิกจ่ายรายเดือน สร้างคลิปไวรัลด้วย AI" />
+    <meta property="og:type" content="website" />
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary: 160 84% 39%;
+            --primary-glow: 160 84% 50%;
+            --accent-red: 10 80% 55%;
+            --accent-orange: 25 95% 53%;
+            --background: 0 0% 98%;
+            --foreground: 215 25% 17%;
+            --muted: 210 40% 96%;
+            --muted-foreground: 215 16% 47%;
+            --border: 214 32% 91%;
+            
+            --gradient-primary: linear-gradient(135deg, hsl(160, 84%, 39%), hsl(160, 84%, 50%));
+            --gradient-urgency: linear-gradient(90deg, hsl(10, 80%, 55%), hsl(25, 95%, 53%));
+            --gradient-subtle: linear-gradient(180deg, hsl(0, 0%, 100%), hsl(210, 40%, 98%));
+            
+            --shadow-elegant: 0 10px 30px -10px hsl(160 84% 39% / 0.3);
+            --shadow-glow: 0 0 40px hsl(160 84% 50% / 0.4);
+            
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Prompt', sans-serif;
+            background: hsl(var(--background));
+            color: hsl(var(--foreground));
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 1rem;
+            background: var(--gradient-subtle);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: hsl(var(--muted-foreground));
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .hero-cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 1.125rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: var(--shadow-elegant);
+            animation: pulse 2s infinite;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: hsl(var(--foreground));
+            border: 2px solid hsl(var(--border));
+        }
+        
+        .btn-secondary:hover {
+            background: hsl(var(--muted));
+        }
+        
+        .trust-badges {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+        
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border-radius: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        /* Comparison Section */
+        .comparison-section {
+            padding: 6rem 1rem;
+            background: white;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .section-description {
+            text-align: center;
+            color: hsl(var(--muted-foreground));
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .comparison-card {
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 2px solid hsl(var(--border));
+        }
+        
+        .comparison-card.recommended {
+            border-color: hsl(var(--primary));
+            box-shadow: var(--shadow-elegant);
+            position: relative;
+        }
+        
+        .recommended-badge {
+            position: absolute;
+            top: -12px;
+            right: 1rem;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .comparison-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .comparison-list {
+            list-style: none;
+        }
+        
+        .comparison-item {
+            display: flex;
+            align-items: start;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .icon-check {
+            color: hsl(var(--primary));
+            flex-shrink: 0;
+        }
+        
+        .icon-x {
+            color: hsl(var(--accent-red));
+            flex-shrink: 0;
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            padding: 6rem 1rem;
+            background: hsl(var(--muted));
+        }
+        
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .step-card {
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .step-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: hsl(var(--primary));
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* ROI Calculator */
+        .roi-calculator {
+            padding: 6rem 1rem;
+            background: white;
+        }
+        
+        .calculator-card {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 3rem;
+            background: var(--gradient-subtle);
+            border-radius: 1.5rem;
+            box-shadow: var(--shadow-elegant);
+        }
+        
+        .slider-group {
+            margin-bottom: 2rem;
+        }
+        
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: hsl(var(--muted));
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .calculation-results {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid hsl(var(--border));
+        }
+        
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+        }
+        
+        .savings-result {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            text-align: center;
+        }
+        
+        .savings-amount {
+            font-size: 3rem;
+            font-weight: 800;
+            color: hsl(var(--primary));
+        }
+        
+        /* Feature Highlights */
+        .feature-highlights {
+            padding: 6rem 1rem;
+            background: hsl(var(--muted));
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: var(--transition-smooth);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-elegant);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-subtitle {
+            color: hsl(var(--primary));
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Pricing Section */
+        .pricing-section {
+            padding: 6rem 1rem;
+            background: white;
+        }
+        
+        .pricing-card {
+            max-width: 600px;
+            margin: 3rem auto 0;
+            padding: 3rem;
+            background: var(--gradient-subtle);
+            border-radius: 1.5rem;
+            box-shadow: var(--shadow-elegant);
+            border: 2px solid hsl(var(--primary));
+            position: relative;
+        }
+        
+        .discount-badge {
+            position: absolute;
+            top: -15px;
+            right: 2rem;
+            background: var(--gradient-urgency);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+        
+        .pricing-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .price-display {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .original-price {
+            text-decoration: line-through;
+            color: hsl(var(--muted-foreground));
+            font-size: 1.5rem;
+        }
+        
+        .current-price {
+            font-size: 4rem;
+            font-weight: 800;
+            color: hsl(var(--primary));
+        }
+        
+        .benefits-list {
+            list-style: none;
+            margin: 2rem 0;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+        }
+        
+        .guarantee-text {
+            text-align: center;
+            color: hsl(var(--muted-foreground));
+            margin-top: 1.5rem;
+            font-size: 0.875rem;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            padding: 6rem 1rem;
+            background: hsl(var(--muted));
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 3rem auto 0;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            width: 100%;
+            padding: 1.5rem;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Prompt', sans-serif;
+        }
+        
+        .faq-question:hover {
+            background: hsl(var(--muted));
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 1.5rem 1.5rem;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        /* Mobile CTA */
+        .mobile-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 1rem;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+            z-index: 50;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-cta {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.75rem;
+            }
+            
+            .calculator-card {
+                padding: 1.5rem;
+            }
+            
+            .pricing-card {
+                padding: 1.5rem;
+            }
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.9;
+                transform: scale(1.02);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content animate-fade-in-up">
+                <h1 class="hero-title">เลิกจ่ายรายเดือน... เสกคลิปไวรัล บนเครื่องคุณ</h1>
+                <p class="hero-subtitle">อัปโหลดรูปสินค้า > เลือกเสียงพากย์ไทย > ได้คลิปขายของทันทีใน 3 นาที. Windows Only & Local Processing.</p>
+                
+                <div class="hero-cta-group">
+                    <a href="#pricing" class="btn btn-primary">🚀 รับสิทธิ์ซื้อขาด 5,900.-</a>
+                    <a href="#demo" class="btn btn-secondary">ดูตัวอย่างคลิป</a>
+                </div>
+                
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <span>💻</span>
+                        <span>Windows Only</span>
+                    </div>
+                    <div class="trust-badge">
+                        <span>💰</span>
+                        <span>No Monthly Fees</span>
+                    </div>
+                    <div class="trust-badge">
+                        <span>🔒</span>
+                        <span>Privacy 100%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Section -->
+        <section class="comparison-section">
+            <div class="container">
+                <h2 class="section-title">ทำไมต้อง Rocket?</h2>
+                <p class="section-description">เปรียบเทียบวิธีเก่า vs วิธีใหม่ที่จะเปลี่ยนเกมของคุณ</p>
+                
+                <div class="comparison-grid">
+                    <!-- Old Way -->
+                    <div class="comparison-card">
+                        <h3 class="comparison-title">
+                            <span>❌</span>
+                            <span>วิธีเก่า</span>
+                        </h3>
+                        <ul class="comparison-list">
+                            <li class="comparison-item">
+                                <span class="icon-x">✗</span>
+                                <span>จ้างคนตัดต่อ 1,000-3,000 บาท/คลิป</span>
+                            </li>
+                            <li class="comparison-item">
+                                <span class="icon-x">✗</span>
+                                <span>รอคลิปเสร็จ 2-3 วัน</span>
+                            </li>
+                            <li class="comparison-item">
+                                <span class="icon-x">✗</span>
+                                <span>แก้ไขลำบาก ต้องติดต่อกลับไปกลับมา</span>
+                            </li>
+                            <li class="comparison-item">
+                                <span class="icon-x">✗</span>
+                                <span>ต้นทุนสูงมาก ถ้าทำบ่อยๆ</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Rocket Way -->
+                    <div class="comparison-card recommended">
+                        <span class="recommended-badge">แนะนำ</span>
+                        <h3 class="comparison-title">
+                            <span>✨</span>
+                            <span>Rocket Way</span>
+                        </h3>
+                        <ul class="comparison-list">
+                            <li class="comparison-item">
+                                <span class="icon-check">✓</span>
+                                <span>จ่ายครั้งเดียว 5,900 บาท ใช้ตลอดชีพ</span>
+                            </li>
+                            <li class="comparison-item">
+                                <span class="icon-check">✓</span>
+                                <span>ได้คลิปใน 3 นาที ไม่ต้องรอ</span>
+                            </li>
+                            <li class="comparison-item">
+                                <span class="icon-check">✓</span>
+                                <span>แก้ไขได้ทันที ไม่จำกัดจำนวน</span>
+                            </li>
+                            <li class="comparison-item">
+                                <span class="icon-check">✓</span>
+                                <span>ทำได้ไม่จำกัด ไม่มีค่าใช้จ่ายเพิ่ม</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="how-it-works">
+            <div class="container">
+                <h2 class="section-title">ใช้งานง่ายเพียง 3 ขั้นตอน</h2>
+                <p class="section-description">ไม่ต้องมีความรู้ด้านการตัดต่อ ใครก็ทำได้</p>
+                
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-icon">📸</div>
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">ใส่รูปสินค้า/สคริปต์</h3>
+                        <p>อัปโหลดรูปสินค้าของคุณ และใส่สคริปต์ที่ต้องการพูด</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-icon">🎤</div>
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">เลือกเสียงพากย์ไทย</h3>
+                        <p>เลือกเสียงพากย์ AI คุณภาพสูง เสียงธรรมชาติเหมือนคนจริง</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-icon">🚀</div>
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">รันโปรแกรม</h3>
+                        <p>กดปุ่มเดียว รอ 3 นาที ได้คลิปพร้อมใช้ทันที</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROI Calculator -->
+        <section class="roi-calculator" id="calculator">
+            <div class="container">
+                <h2 class="section-title">คำนวณความคุ้มค่าของคุณ</h2>
+                <p class="section-description">ดูว่าคุณจะประหยัดได้เท่าไหร่ในปีแรก</p>
+                
+                <div class="calculator-card">
+                    <div class="slider-group">
+                        <div class="slider-label">
+                            <span>ต้นทุนจ้างตัดต่อต่อคลิป (บาท)</span>
+                            <span id="costValue">1,000</span>
+                        </div>
+                        <input type="range" class="slider" id="costSlider" min="500" max="5000" step="100" value="1000">
+                    </div>
+                    
+                    <div class="slider-group">
+                        <div class="slider-label">
+                            <span>จำนวนคลิปต่อเดือน</span>
+                            <span id="clipsValue">10</span>
+                        </div>
+                        <input type="range" class="slider" id="clipsSlider" min="1" max="100" step="1" value="10">
+                    </div>
+                    
+                    <div class="calculation-results">
+                        <div class="result-row">
+                            <span>ค่าใช้จ่ายวิธีเก่า/ปี:</span>
+                            <span id="oldCost">120,000 บาท</span>
+                        </div>
+                        <div class="result-row">
+                            <span>ค่า Rocket (จ่ายครั้งเดียว):</span>
+                            <span>5,900 บาท</span>
+                        </div>
+                    </div>
+                    
+                    <div class="savings-result">
+                        <div style="font-size: 1.25rem; margin-bottom: 0.5rem;">คุณประหยัดเงินปีแรกได้:</div>
+                        <div class="savings-amount" id="savingsAmount">114,100 บาท</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Highlights -->
+        <section class="feature-highlights">
+            <div class="container">
+                <h2 class="section-title">ฟีเจอร์เด่นที่คุณจะได้</h2>
+                <p class="section-description">ทุกอย่างที่คุณต้องการในที่เดียว</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎙️</div>
+                        <h3 class="feature-title">Thai Voice Pro</h3>
+                        <p class="feature-subtitle">เสียงไทยธรรมชาติ</p>
+                        <p>เสียงพากย์ AI คุณภาพสูง ฟังแล้วไม่รู้ว่าเป็น AI</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📦</div>
+                        <h3 class="feature-title">Real Product Gen</h3>
+                        <p class="feature-subtitle">เจนจากรูปสินค้าจริง</p>
+                        <p>ใส่รูปสินค้าเข้าไป ระบบจะเจนคลิปขายของแบบอัตโนมัติ</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3 class="feature-title">All Formats</h3>
+                        <p class="feature-subtitle">TikTok/Reels/Shorts</p>
+                        <p>รองรับทุกแพลตฟอร์ม ไม่ว่า TikTok, Instagram Reels หรือ YouTube Shorts</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="pricing-section" id="pricing">
+            <div class="container">
+                <h2 class="section-title">ข้อเสนอพิเศษ! 🔥</h2>
+                <p class="section-description">รับสิทธิ์ซื้อขาดตลอดชีพ ในราคาที่ไม่เคยมีอีก</p>
+                
+                <div class="pricing-card">
+                    <span class="discount-badge">ลด 63%</span>
+                    
+                    <h3 class="pricing-title">Rocket Lifetime License</h3>
+                    
+                    <div class="price-display">
+                        <div class="original-price">15,900.-</div>
+                        <div class="current-price">5,900.-</div>
+                    </div>
+                    
+                    <ul class="benefits-list">
+                        <li class="benefit-item">
+                            <span class="icon-check">✓</span>
+                            <span>ใช้งานได้ตลอดชีพ ไม่มีค่าใช้จ่ายรายเดือน</span>
+                        </li>
+                        <li class="benefit-item">
+                            <span class="icon-check">✓</span>
+                            <span>สร้างคลิปได้ไม่จำกัด</span>
+                        </li>
+                        <li class="benefit-item">
+                            <span class="icon-check">✓</span>
+                            <span>อัปเดตฟรีตลอดชีพ</span>
+                        </li>
+                        <li class="benefit-item">
+                            <span class="icon-check">✓</span>
+                            <span>เสียงพากย์ไทย AI คุณภาพสูง</span>
+                        </li>
+                        <li class="benefit-item">
+                            <span class="icon-check">✓</span>
+                            <span>ประมวลผลบนเครื่อง ข้อมูลปลอดภัย 100%</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="#" class="btn btn-primary" style="width: 100%; text-align: center;">ซื้อ License ถาวรทันที</a>
+                    
+                    <p class="guarantee-text">🛡️ รับประกันคืนเงินใน 7 วัน หากไม่พอใจ</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="container">
+                <h2 class="section-title">คำถามที่พบบ่อย</h2>
+                <p class="section-description">ตอบทุกข้อสงสัยก่อนตัดสินใจ</p>
+                
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>ทำไมต้อง Windows Only?</span>
+                            <span class="faq-icon">▼</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>เพราะเราใช้ AI Model ที่ต้องการ GPU ของ Windows ในการประมวลผลให้รวดเร็ว และทำงานได้อย่างมีประสิทธิภาพสูงสุด ซึ่งจะทำให้คุณได้คลิปเร็วกว่าการใช้ Cloud-based มาก</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>ต้องใช้อินเทอร์เน็ตไหม?</span>
+                            <span class="faq-icon">▼</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>ไม่จำเป็นต้องใช้อินเทอร์เน็ตหลังจากติดตั้งแล้ว ทุกอย่างทำงานบนเครื่องของคุณ ข้อมูลของคุณจึงปลอดภัย 100%</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>สเปคคอมต้องแรงแค่ไหน?</span>
+                            <span class="faq-icon">▼</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>แนะนำ: Windows 10/11, RAM 8GB ขึ้นไป, GPU NVIDIA GTX 1060 ขึ้นไป (ยิ่งแรงยิ่งเร็ว) และพื้นที่ว่างอย่างน้อย 10GB</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>ถ้าไม่ถูกใจคืนเงินได้จริงไหม?</span>
+                            <span class="faq-icon">▼</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>ได้เต็มจำนวน ภายใน 7 วัน หากคุณไม่พอใจ โดยไม่ถามคำถามใดๆ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Mobile CTA -->
+    <div class="mobile-cta">
+        <a href="#pricing" class="btn btn-primary" style="width: 100%; text-align: center;">🚀 รับสิทธิ์ซื้อขาด 5,900.-</a>
+    </div>
+
+    <script>
+        // ROI Calculator
+        const costSlider = document.getElementById('costSlider');
+        const clipsSlider = document.getElementById('clipsSlider');
+        const costValue = document.getElementById('costValue');
+        const clipsValue = document.getElementById('clipsValue');
+        const oldCost = document.getElementById('oldCost');
+        const savingsAmount = document.getElementById('savingsAmount');
+        
+        function formatNumber(num) {
+            return num.toLocaleString('th-TH');
+        }
+        
+        function calculateROI() {
+            const cost = parseInt(costSlider.value);
+            const clips = parseInt(clipsSlider.value);
+            const yearlyOldCost = cost * clips * 12;
+            const savings = yearlyOldCost - 5900;
+            
+            costValue.textContent = formatNumber(cost);
+            clipsValue.textContent = clips;
+            oldCost.textContent = formatNumber(yearlyOldCost) + ' บาท';
+            savingsAmount.textContent = formatNumber(savings) + ' บาท';
+        }
+        
+        costSlider.addEventListener('input', calculateROI);
+        clipsSlider.addEventListener('input', calculateROI);
+        
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
